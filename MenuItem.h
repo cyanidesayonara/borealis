@@ -28,7 +28,7 @@ struct MenuItem {
   Drawable *drawable;
   bool exit = false;
   bool visible = true;
-  bool audioScaleEnabled = false;
+//  bool audioScaleEnabled = false;
   bool playModeEnabled = false;
   bool paletteEnabled = false;
 

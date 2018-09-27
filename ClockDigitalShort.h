@@ -45,16 +45,18 @@ class ClockDigitalShort : public Drawable {
   public:
     char timeBuffer[9];
     uint8_t y = 11;
+    uint8_t x = 11;
     rgb24 color = CRGB(CRGB::White);
 
     bool twentyFourHour = false;
 
     unsigned int drawFrame() {
       return drawFrame(y);
+      return drawFrame(x);
     }
 
     unsigned int drawFrame(const int cy) {
-      int x = 1;
+      int x = 13;
 
       if (isTimeAvailable) {
         uint8_t hour = time.Hour;
@@ -63,11 +65,11 @@ class ClockDigitalShort : public Drawable {
         else if (!twentyFourHour && hour == 0)
           hour = 12;
 
-        indexedLayer.setFont(gohufont11b);
-        sprintf(timeBuffer, "%d:%02d", hour, time.Minute);
+        indexedLayer.setFont(font8x13);
+        sprintf(timeBuffer, "%02d:%02d", hour, time.Minute);
 
-        if (hour < 10)
-          x = 4;
+//        if (hour < 10)
+//          x = 4;
       }
       else {
         indexedLayer.setFont(font3x5);
@@ -81,32 +83,40 @@ class ClockDigitalShort : public Drawable {
       return 0;
     }
 
-    void drawMoveClockIndicator() {
-      for (int16_t x = 2; x <= 26; x += 6) {
+//    void drawMoveClockIndicator() {
+//      for (int16_t x = 2; x <= 26; x += 6) {
         // upper indicators (in case the clock's at the bottom)
-        backgroundLayer.drawTriangle(x + 0, y - 1, x + 1, y - 2, x + 2, y - 1, CRGB(CRGB::SlateGray));
+//        backgroundLayer.drawTriangle(x + 0, y - 1, x + 1, y - 2, x + 2, y - 1, CRGB(CRGB::SlateGray));
 
         // lower indicators (in case the clock's at the top)
-        backgroundLayer.drawTriangle(x + 0, y + 11, x + 1, y + 12, x + 2, y + 11, CRGB(CRGB::SlateGray));
-      }
-    }
+//        backgroundLayer.drawTriangle(x + 0, y + 11, x + 1, y + 12, x + 2, y + 11, CRGB(CRGB::SlateGray));
+//      }
+//    }
 
     char* clockYFilename = (char*) "clockY.txt";
+//    char* clockXFilename = (char*) "clockX.txt";
     char* clock24hFilename = (char*) "clock24h.txt";
 
     void loadSettings() {
       y = loadByteSetting(clockYFilename, 11);
+//      x = loadByteSetting(clockXFilename, 11);
       twentyFourHour = loadByteSetting(clock24hFilename, 0) == 1;
       boundY();
+//      boundX();
     }
 
     void saveSettings() {
       saveClockYSetting();
+//      saveClockXSetting();
     }
 
     void saveClockYSetting() {
       saveIntSetting(clockYFilename, y);
     }
+
+//    void saveClockXSetting() {
+//      saveIntSetting(clockXFilename, x);
+//    }
 
     void saveTwentyFourHourSetting() {
       saveIntSetting(clock24hFilename, twentyFourHour);
@@ -115,9 +125,16 @@ class ClockDigitalShort : public Drawable {
     void boundY() {
       if (y < -1)
         y = -1;
-      else if (y > 23)
-        y = 23;
+      else if (y > 55)
+        y = 55;
     }
+
+//    void boundX() {
+//      if (x < 0)
+//        x = 0;
+//      else if (x > 34)
+//        x = 34;
+//    }
 };
 extern ClockDigitalShort clockDigitalShort;
 

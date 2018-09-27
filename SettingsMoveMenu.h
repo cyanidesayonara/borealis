@@ -81,7 +81,7 @@ class SettingsMoveMenu : public Runnable {
 
     void boundMenuY() {
       if(menuY < 0) menuY = 0;
-      if(menuY > MATRIX_HEIGHT - 11) menuY = MATRIX_HEIGHT - 11;
+      if(menuY > MATRIX_HEIGHT - 9) menuY = MATRIX_HEIGHT - 9;
     }
     
     void saveMenuY() {
@@ -93,12 +93,12 @@ class SettingsMoveMenu : public Runnable {
       boundMenuY();
     }
 
-    unsigned int drawFrame() {
-      backgroundLayer.fillScreen(CRGB(CRGB::Black));
-      backgroundLayer.setFont(font3x5);
-      backgroundLayer.drawString(0, 27, { 255, 255, 255 }, versionText);
-      return 0;
-    }
+//    unsigned int drawFrame() {
+//      backgroundLayer.fillScreen(CRGB(CRGB::Black));
+//      backgroundLayer.setFont(font3x5);
+//      backgroundLayer.drawString(0, 27, { 255, 255, 255 }, versionText);
+//      return 0;
+//    }
 };
 
 #endif

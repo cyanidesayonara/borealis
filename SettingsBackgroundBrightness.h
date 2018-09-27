@@ -103,12 +103,12 @@ class SettingsBackgroundBrightness : public Runnable {
       }
     }
 
-    unsigned int drawFrame() {
-      backgroundLayer.fillScreen(CRGB(CRGB::Black));
-      backgroundLayer.setFont(font3x5);
-      backgroundLayer.drawString(0, 27, { 255, 255, 255 }, versionText);
-      return 0;
-    }
+//    unsigned int drawFrame() {
+//      backgroundLayer.fillScreen(CRGB(CRGB::Black));
+//      backgroundLayer.setFont(font3x5);
+//      backgroundLayer.drawString(0, 27, { 255, 255, 255 }, versionText);
+//      return 0;
+//    }
 };
 
 #endif

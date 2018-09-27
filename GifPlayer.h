@@ -98,13 +98,13 @@ class GifPlayer {
     int colorCount;
     _RGB gifPalette[256];
 
-    byte lzwImageData[1280];
-    char tempBuffer[260];
+    byte lzwImageData[1280]; // 1280
+    char tempBuffer[250]; // 260
 
     File file;
 
-    static const uint8_t WIDTH  = 32;
-    static const uint8_t HEIGHT = 32;
+    static const uint8_t WIDTH  = 64;
+    static const uint8_t HEIGHT = 64;
     
     byte imageData[WIDTH * HEIGHT];
     byte imageDataBU[WIDTH * HEIGHT];

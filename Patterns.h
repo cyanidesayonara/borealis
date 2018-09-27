@@ -24,30 +24,32 @@
 #define Patterns_H
 
 #include "Vector.h"
-#include "Boid.h"
-#include "Attractor.h"
+//#include "Boid.h"
+//#include "Attractor.h"
 
 //#include "PatternPride.h"
 //#include "PatternNoiseSmearing.h"
 #include "PatternSpiro.h"
 #include "PatternRadar.h"
-//#include "PatternAnalogClock.h"
-#include "PatternSwirl.h"
-#include "PatternPendulumWave.h"
-#include "PatternFlowField.h"
+#include "PatternAnalogClock.h"
+#include "PatternAnalogClock2.h"
+#include "PatternPongClock.h"
+//#include "PatternSwirl.h"
+//#include "PatternPendulumWave.h"
+//#include "PatternFlowField.h"
 #include "PatternIncrementalDrift.h"
 #include "PatternIncrementalDrift2.h"
 #include "PatternMunch.h"
 //#include "PatternElectricMandala.h"
 //#include "PatternSpin.h"
 //#include "PatternSimplexNoise.h"
-#include "PatternWave.h"
+//#include "PatternWave.h"
 //#include "PatternAttract.h"
 //#include "PatternBounce.h"
 //#include "PatternFlock.h"
 #include "PatternInfinity.h"
-//#include "PatternPlasma.h"
-//#include "PatternSnake.h"
+#include "PatternPlasma.h"
+#include "PatternSnake.h"
 //#include "PatternInvaders.h"
 //#include "PatternCube.h"
 //#include "PatternFire.h"
@@ -68,23 +70,25 @@ class Patterns : public Playlist {
 //    PatternMultipleStream4 multipleStream4;
 //    PatternMultipleStream5 multipleStream5;
 //    PatternMultipleStream8 multipleStream8;
-    PatternRadar radar;
+//    PatternRadar radar;
     PatternSpiro spiro;
 //    PatternAnalogClock analogClock;
-    PatternSwirl swirl;
-    PatternPendulumWave pendulumWave;
-    PatternFlowField flowField;
-    PatternIncrementalDrift incrementalDrift;
-    PatternIncrementalDrift2 incrementalDrift2;
-    PatternMunch munch;
+    PatternAnalogClock2 analogClock2;
+//    PatternPongClock pongClock;
+//    PatternSwirl swirl;
+//    PatternPendulumWave pendulumWave;
+//    PatternFlowField flowField;
+//    PatternIncrementalDrift incrementalDrift;
+//    PatternIncrementalDrift2 incrementalDrift2;
+//    PatternMunch munch;
 //    PatternElectricMandala electricMandala;
 //    PatternSpin spin;
 //    PatternSimplexNoise simplexNoise;
-    PatternWave wave;
+//    PatternWave wave;
 //    PatternAttract attract;
 //    PatternBounce bounce;
 //    PatternFlock flock;
-    PatternInfinity infinity;
+//    PatternInfinity infinity;
 //    PatternPride pride;
 //    PatternPlasma plasma;
 //    PatternInvadersSmall invadersSmall;
@@ -107,7 +111,7 @@ class Patterns : public Playlist {
       return currentIndex;
     }
 
-    static const int PATTERN_COUNT = 10;
+    static const int PATTERN_COUNT = 2;
 
     Drawable* shuffledItems[PATTERN_COUNT];
 
@@ -119,25 +123,27 @@ class Patterns : public Playlist {
 //      &multipleStream8,
 //      &multipleStream5,
 //      &multipleStream3,
-      &radar,
+//      &radar,
 //      &multipleStream4,
 //      &multipleStream2,
 //      &life,
-      &flowField,
-      &pendulumWave,
-      &incrementalDrift,
-      &incrementalDrift2,
-      &munch,
+//      &flowField,
+//      &pendulumWave,
+//      &incrementalDrift,
+//      &incrementalDrift2,
+//      &munch,
 //      &electricMandala,
 //      &spin,
 //      &simplexNoise,
-      &wave,
+//      &wave,
 //      &attract,
 //      &analogClock,
-      &swirl,
+      &analogClock2,
+//      &pongClock,
+//      &swirl,
 //      &bounce,
 //      &flock,
-      &infinity,
+//      &infinity,
 //      &plasma,
 //      &invadersSmall,
 //      &invadersMedium,

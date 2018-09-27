@@ -24,9 +24,9 @@
 
 class PatternAnalogClock : public Drawable {
 private:
-#define HOUR_HAND_RADIUS 15
-#define MIN_HAND_RADIUS  15
-#define SEC_IND_RADIUS   15
+#define HOUR_HAND_RADIUS 31
+#define MIN_HAND_RADIUS  31
+#define SEC_IND_RADIUS   31
 
 public:
     PatternAnalogClock() {

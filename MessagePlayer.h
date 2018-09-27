@@ -72,14 +72,14 @@ public:
     count = fileCount;
 
     File messagesFile = SD.open("/messages.txt", FILE_READ);
-    if (messagesFile) {
-      messagesFileLineCount = countMessagesFileLines(messagesFile);
-    }
-    else {
-      messagesFileLineCount = createMessagesFile();
-    }
+//    if (messagesFile) {
+//      messagesFileLineCount = countMessagesFileLines(messagesFile);
+//    }
+//    else {
+//      messagesFileLineCount = createMessagesFile();
+//    }
 
-    count += messagesFileLineCount;
+//    count += messagesFileLineCount;
 
     // Serial.print(F("message file count: "));
     // Serial.println(fileCount);
@@ -87,17 +87,17 @@ public:
     // Serial.print(F("message count: "));
     // Serial.println(count);
 
-    currentIndex = -1;
-  }
+//    currentIndex = -1;
+//  }
 
-  uint8_t createMessagesFile() {
-    File file = SD.open("/messages.txt", O_CREAT | O_TRUNC | O_WRITE);
-    if (file) {
-      file.print("Your first message\r\nYour second message");
-      file.close();
-      return 2;
-    }
-    return 0;
+//  uint8_t createMessagesFile() {
+//    File file = SD.open("/messages.txt", O_CREAT | O_TRUNC | O_WRITE);
+//    if (file) {
+//      file.print("Your first message\r\nYour second message");
+//      file.close();
+//      return 2;
+//    }
+//    return 0;
   }
 
   // count the number of files

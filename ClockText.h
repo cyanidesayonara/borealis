@@ -68,10 +68,10 @@ class ClockText : public Drawable {
     unsigned int drawFrame() {
       uint8_t y = clockDigitalShort.y;
 
-      if (y < 0)
+      if (y < 26)
         y = 0;
-      else if (y > 11)
-        y = 11;
+      else if (y >= 26)
+        y = 45;
 
       return drawFrame(y);
     }
@@ -81,7 +81,7 @@ class ClockText : public Drawable {
       indexedLayer.setFont(font3x5);
       indexedLayer.fillScreen(0);
 
-      int x = 1;
+      int x = 0;
 
       if (isTimeAvailable) {
         uint8_t hour = time.Hour;
@@ -90,32 +90,56 @@ class ClockText : public Drawable {
         if (hour > 12)
           hour -= 12;
 
-        if (minute == 0) {
+        if (minute == 0 && cy < 26) {
           indexedLayer.drawString(x, cy, 1, onesStrings[hour]);
           indexedLayer.drawString(x, cy + 7, 1, "o'clock");
         }
-        else if (minute < 10) {
+        else if (minute < 11 && cy < 26) {
           indexedLayer.drawString(x, cy, 2, onesStrings[minute]);
           indexedLayer.drawString(x, cy + 7, 1, "past");
           indexedLayer.drawString(x, cy + 14, 1, onesStrings[hour]);
         }
-        else if (minute == 17) {
-          indexedLayer.drawString(x, cy, 1, onesStrings[hour]);
-          indexedLayer.drawString(x, cy + 7, 1, onesStrings[7]);
-          indexedLayer.drawString(x, cy + 14, 1, "teen");
+        if (minute == 0 && cy >= 26) {
+          indexedLayer.drawString(x, cy + 7, 1, onesStrings[hour]);
+          indexedLayer.drawString(x, cy + 14, 1, "o'clock");
         }
-        else if (minute < 20) {
+        else if (minute < 11 && cy >= 26) {
+          indexedLayer.drawString(x, cy, 2, onesStrings[minute]);
+          indexedLayer.drawString(x, cy + 7, 1, "past");
+          indexedLayer.drawString(x, cy + 14, 1, onesStrings[hour]);
+        }
+//        else if (minute == 17) {
+//          indexedLayer.drawString(x, cy, 1, onesStrings[hour]);
+//          indexedLayer.drawString(x, cy + 7, 1, onesStrings[7]);
+//          indexedLayer.drawString(x, cy + 14, 1, "teen");
+//        }
+        if (minute < 20 && minute > 10 && cy < 26) {
           indexedLayer.drawString(x, cy, 1, onesStrings[hour]);
           indexedLayer.drawString(x, cy + 7, 1, onesStrings[minute]);
         }
-        else {
+        else if (minute < 20 && minute > 10 && cy >= 26) {
+          indexedLayer.drawString(x, cy + 7, 1, onesStrings[hour]);
+          indexedLayer.drawString(x, cy + 14, 1, onesStrings[minute]);
+        }
+        if (minute >= 20 && minute % 10 > 0 && cy < 26) {
           indexedLayer.drawString(x, cy, 1, onesStrings[hour]);
           indexedLayer.drawString(x, cy + 7, 1, tensStrings[minute / 10 - 2]);
-
-          if (minute % 10 > 0) {
-            indexedLayer.drawString(x, cy + 14, 1, onesStrings[minute % 10]);
-          }
+          indexedLayer.drawString(x, cy + 14, 1, onesStrings[minute % 10]);
         }
+        else if (minute >= 20 && minute % 10 == 0 && cy < 26) {
+          indexedLayer.drawString(x, cy, 1, onesStrings[hour]);
+          indexedLayer.drawString(x, cy + 7, 1, tensStrings[minute / 10 - 2]);
+        }
+        if (minute >= 20 && minute % 10 > 0 && cy >= 26) {
+          indexedLayer.drawString(x, cy, 1, onesStrings[hour]);
+          indexedLayer.drawString(x, cy + 7, 1, tensStrings[minute / 10 - 2]);
+          indexedLayer.drawString(x, cy + 14, 1, onesStrings[minute % 10]);
+        }
+        else if (minute >= 20 && minute % 10 == 0 && cy >= 26) {
+          indexedLayer.drawString(x, cy + 7, 1, onesStrings[hour]);
+          indexedLayer.drawString(x, cy + 14, 1, tensStrings[minute / 10 - 2]);
+        }
+
       }
       else {
         indexedLayer.drawString(x, cy, 1, "No Clock");

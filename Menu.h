@@ -1,8 +1,4 @@
-/*
- * Aurora: https://github.com/pixelmatix/aurora
- * Copyright (c) 2014 Jason Coon
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of
+/*    else if (!visible && !showingPlayModeIndicator && !showingBrightnessIndicator && !showingAudioScaleIndicator && !showingPaletteIndicator && clockVisible) { copy of
  * this software and associated documentation files (the "Software"), to deal in
  * the Software without restriction, including without limitation the rights to
  * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
@@ -330,18 +326,18 @@ public:
           updateScrollText = true;
           break;
         }
-        else if ((command == InputCommand::AudioScaleUp || (command == InputCommand::Up && !visible)) && currentMenuItem->audioScaleEnabled) {
-          adjustAudioScale(1);
-          audioScaleChanged = true;
-          showingAudioScaleIndicator = true;
-          audioScaleIndicatorTimout = millis() + audioScaleIndicatorDuration;
-        }
-        else if ((command == InputCommand::AudioScaleDown || (command == InputCommand::Down && !visible)) && currentMenuItem->audioScaleEnabled) {
-          adjustAudioScale(-1);
-          audioScaleChanged = true;
-          showingAudioScaleIndicator = true;
-          audioScaleIndicatorTimout = millis() + audioScaleIndicatorDuration;
-        }
+//        else if ((command == InputCommand::AudioScaleUp || (command == InputCommand::Up && !visible)) && currentMenuItem->audioScaleEnabled) {
+//          adjustAudioScale(1);
+//          audioScaleChanged = true;
+//          showingAudioScaleIndicator = true;
+//          audioScaleIndicatorTimout = millis() + audioScaleIndicatorDuration;
+//        }
+//        else if ((command == InputCommand::AudioScaleDown || (command == InputCommand::Down && !visible)) && currentMenuItem->audioScaleEnabled) {
+//          adjustAudioScale(-1);
+//          audioScaleChanged = true;
+//          showingAudioScaleIndicator = true;
+//          audioScaleIndicatorTimout = millis() + audioScaleIndicatorDuration;
+//        }
         else if (command == InputCommand::ToggleSettingsMenuVisibility) {
           toggleSettingsMenuVisibility();
         }

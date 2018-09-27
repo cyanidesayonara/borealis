@@ -29,12 +29,12 @@ class SettingsUpdateFiles : public Runnable {
       restartAndJumpToApp();
     }
 
-    unsigned int drawFrame() {
-      backgroundLayer.fillScreen(CRGB(CRGB::Black));
-      backgroundLayer.setFont(font3x5);
-      backgroundLayer.drawString(0, 27, CRGB(CRGB::White), versionText);
-      return 0;
-    }
+//    unsigned int drawFrame() {
+//      backgroundLayer.fillScreen(CRGB(CRGB::Black));
+//      backgroundLayer.setFont(font3x5);
+//      backgroundLayer.drawString(0, 27, CRGB(CRGB::White), versionText);
+//      return 0;
+//    }
 };
 
 #endif

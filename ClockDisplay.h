@@ -33,13 +33,13 @@ class ClockDisplay : public Playlist {
 
     int currentIndex = 0;
 
-    uint8_t itemCount = 4;
+    uint8_t itemCount = 2;
 
-    Drawable* items[4] = {
+    Drawable* items[2] = {
       &clockDigitalShort,
       &clockText,
-      &clockPong,
-      &clockCountdown,
+//      &clockPong,
+//      &clockCountdown,
     };
 
     Drawable* currentItem = items[currentIndex];
@@ -133,25 +133,30 @@ class ClockDisplay : public Playlist {
       clockDigitalShort.boundY();
     }
 
-    void drawMoveClockIndicator() {
-      clockDigitalShort.drawMoveClockIndicator();
-    }
+//    void adjustX(int d) {
+//      clockDigitalShort.x += d;
+//      clockDigitalShort.boundX();
+//    }
+
+//    void drawMoveClockIndicator() {
+//      clockDigitalShort.drawMoveClockIndicator();
+//    }
 
     char* clockR = (char*) "clockR.txt";
     char* clockG = (char*) "clockG.txt";
     char* clockB = (char*) "clockB.txt";
 
     void loadSettings() {
-      clockCountdown.loadSettings();
+//      clockCountdown.loadSettings();
       clockDigitalShort.loadSettings();
 
-      readTime();
-      time_t currentTime = makeTime(time);
-      if (clockCountdown.targetTime <= currentTime) {
-        itemCount--;
-      }
-
-      move(0);
+//      readTime();
+//      time_t currentTime = makeTime(time);
+//      if (clockCountdown.targetTime <= currentTime) {
+//        itemCount--;
+//      }
+//
+//      move(0);
 
       color.red = loadByteSetting(clockR, 255);
       color.green = loadByteSetting(clockG, 255);
@@ -169,6 +174,10 @@ class ClockDisplay : public Playlist {
     void saveClockYSetting() {
       clockDigitalShort.saveClockYSetting();
     }
+
+//    void saveClockXSetting() {
+//      clockDigitalShort.saveClockXSetting();
+//    }
 
     void saveTwentyFourHourSetting() {
       clockDigitalShort.saveTwentyFourHourSetting();

@@ -33,7 +33,7 @@ class SettingsMoveClock : public Runnable {
         backgroundLayer.fillScreen(CRGB(CRGB::Black));
 
         clockDigitalShort.drawFrame();
-        clockDigitalShort.drawMoveClockIndicator();
+//        clockDigitalShort.drawMoveClockIndicator();
 
         backgroundLayer.swapBuffers();
         indexedLayer.swapBuffers();
@@ -51,10 +51,21 @@ class SettingsMoveClock : public Runnable {
             hasChanges = true;
             break;
 
+//          case InputCommand::Left:
+//            clockDisplay.adjustX(-1);
+//            hasChanges = true;
+//            break;
+
+//          case InputCommand::Right:
+//            clockDisplay.adjustX(1);
+//            hasChanges = true;
+//            break;
+
           case InputCommand::Select:
           case InputCommand::Back:
             if (hasChanges) {
               clockDisplay.saveClockYSetting();
+//              clockDisplay.saveClockXSetting();
               hasChanges = false;
             }
             return;
@@ -65,12 +76,12 @@ class SettingsMoveClock : public Runnable {
       }
     }
 
-    unsigned int drawFrame() {
-      backgroundLayer.fillScreen(CRGB(CRGB::Black));
-      backgroundLayer.setFont(font3x5);
-      backgroundLayer.drawString(0, 27, { 255, 255, 255 }, versionText);
-      return 0;
-    }
+//    unsigned int drawFrame() {
+//      backgroundLayer.fillScreen(CRGB(CRGB::Black));
+//      backgroundLayer.setFont(font3x5);
+//      backgroundLayer.drawString(0, 27, { 255, 255, 255 }, versionText);
+//      return 0;
+//    }
 };
 
 #endif

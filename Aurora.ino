@@ -96,8 +96,8 @@ uint8_t brightness = 255;
 uint8_t backgroundBrightness = 255;
 
 const uint8_t brightnessCount = 5;
-uint8_t brightnessMap[brightnessCount] = { 16, 32, 64, 128, 255 };
-uint8_t backgroundBrightnessMap[brightnessCount] = { 16, 32, 64, 128, 255 };
+uint8_t brightnessMap[brightnessCount] = { 1, 16, 64, 128, 255 };
+uint8_t backgroundBrightnessMap[brightnessCount] = { 1, 16, 64, 128, 255 };
 
 #include "MessagePlayer.h"
 MessagePlayer messagePlayer;
@@ -137,11 +137,11 @@ ClockDigitalShort clockDigitalShort;
 #include "ClockText.h"
 ClockText clockText;
 
-#include "ClockCountdown.h"
-ClockCountdown clockCountdown;
+//#include "ClockCountdown.h"
+//ClockCountdown clockCountdown;
 
-#include "ClockPong.h"
-ClockPong clockPong;
+//#include "ClockPong.h"
+//ClockPong clockPong;
 
 #include "ClockDisplay.h"
 ClockDisplay clockDisplay;
@@ -149,8 +149,8 @@ ClockDisplay clockDisplay;
 #include "Patterns.h"
 Patterns patterns;
 
-#include "AudioPatterns.h"
-AudioPatterns audioPatterns;
+//#include "AudioPatterns.h"
+//AudioPatterns audioPatterns;
 
 #include "Animations.h"
 Animations animations;
@@ -184,7 +184,7 @@ Settings settings;
 #include "SettingsSetTime.h"
 #include "SettingsMoveClock.h"
 
-MenuItem menuItemAudioPatterns = MenuItem(audioPatterns.name, &audioPatterns);
+//MenuItem menuItemAudioPatterns = MenuItem(audioPatterns.name, &audioPatterns);
 MenuItem menuItemPatterns = MenuItem(patterns.name, &patterns);
 MenuItem menuItemAnimations = MenuItem(animations.name, &animations);
 #if GAMES > 0
@@ -197,7 +197,7 @@ MenuItem menuItemSettings = MenuItem(settings.name, &settings);
 
 // Main Menu
 MenuItem* mainMenuItems [] = {
-  &menuItemAudioPatterns,
+//  &menuItemAudioPatterns,
   &menuItemPatterns,
   &menuItemAnimations,
 #if GAMES > 0
@@ -318,16 +318,16 @@ void setup()
 
     loadOverlaySettings();
 
-    loadDemoModeSetting();
+//    loadDemoModeSetting();
 
-    if (demoMode == 0) {
-      loadSettings();
-    }
-    else {
-      saveSettings();
-    }
+//    if (demoMode == 0) {
+//      loadSettings();
+//    }
+//    else {
+//      saveSettings();
+//    }
 
-    applyDemoMode();
+//    applyDemoMode();
   }
 
   if (!HAS_IR) {
@@ -335,9 +335,9 @@ void setup()
     menu.visible = false;
   }
 
-  menuItemAudioPatterns.visible = enableAudioPatterns;
-  menuItemAudioPatterns.playModeEnabled = true;
-  menuItemAudioPatterns.paletteEnabled = true;
+//  menuItemAudioPatterns.visible = enableAudioPatterns;
+//  menuItemAudioPatterns.playModeEnabled = true;
+//  menuItemAudioPatterns.paletteEnabled = true;
 
   menuItemPatterns.playModeEnabled = true;
   menuItemPatterns.paletteEnabled = true;
@@ -371,27 +371,27 @@ void loop()
   menu.run(mainMenuItems, mainMenuItemCount);
 }
 
-void listAudioPatterns() {
-  audioPatterns.listAudioPatterns();
-}
+//void listAudioPatterns() {
+//  audioPatterns.listAudioPatterns();
+//}
 
-bool setAudioPattern(String name) {
-  if (audioPatterns.setAudioPattern(name)) {
-    menu.currentIndex = 0;
-    menu.visible = false;
-    return true;
-  }
-  return false;
-}
+//bool setAudioPattern(String name) {
+//  if (audioPatterns.setAudioPattern(name)) {
+//    menu.currentIndex = 0;
+//    menu.visible = false;
+//    return true;
+//  }
+//  return false;
+//}
 
-bool setAudioPattern(int index) {
-  if (audioPatterns.setAudioPattern(index)) {
-    menu.currentIndex = 0;
-    menu.visible = false;
-    return true;
-  }
-  return false;
-}
+//bool setAudioPattern(int index) {
+//  if (audioPatterns.setAudioPattern(index)) {
+//    menu.currentIndex = 0;
+//    menu.visible = false;
+//    return true;
+//  }
+//  return false;
+//}
 
 void listPatterns() {
   patterns.listPatterns();
@@ -489,10 +489,10 @@ void powerOff()
 // we revert to all defaults on startup, all other settings are discarded,
 // and the settings menu is hidden.  The 5 button on the Adafruit remote
 // can be used to show the settings menu and exit demo mode.
-char* demoModeFilename = (char*) "demomode.txt";
-void loadDemoModeSetting() {
-  demoMode = loadByteSetting(demoModeFilename, 0);
-}
+//char* demoModeFilename = (char*) "demomode.txt";
+//void loadDemoModeSetting() {
+//  demoMode = loadByteSetting(demoModeFilename, 0);
+//}
 
 // Loads which remote(s) should be enabled. This setting is loaded separately
 // from other settings, as this applies moreso in demo mode than any other time.
@@ -507,7 +507,7 @@ void loadRemotesSetting() {
   // 7 sparkfun, adafruit & smartmatrix
   // 8 ronix? six button remote
 
-  byte remotes = loadByteSetting("remotes.txt", 7);
+  byte remotes = loadByteSetting("remotes.txt", 4);
 
   // Serial.print(F("remotes setting is "));
   // Serial.println(remotes);
@@ -570,16 +570,16 @@ void loadSettings() {
   boundBackgroundBrightness();
   backgroundLayer.setBrightness(backgroundBrightness);
 
-  audioScale = loadByteSetting(audiosclFilename, 0);
-  boundAudioScale();
+//  audioScale = loadByteSetting(audiosclFilename, 0);
+//  boundAudioScale();
 
   menuColor.red = loadByteSetting(menuRFilename, 0);
   menuColor.green = loadByteSetting(menuGFilename, 0);
   menuColor.blue = loadByteSetting(menuBFilename, 255);
 
-  autoPlayDurationSeconds = loadIntSetting(autoplydFilename, 3, 10);
+//  autoPlayDurationSeconds = loadIntSetting(autoplydFilename, 3, 10);
 
-  settings.load();
+//  settings.load();
 }
 
 void saveSettings() {
@@ -691,7 +691,7 @@ void adjustDemoMode(int delta) {
 }
 
 void applyDemoMode() {
-  menuItemAudioPatterns.audioScaleEnabled = demoMode == 0;
+//  menuItemAudioPatterns.audioScaleEnabled = demoMode == 0;
 
   if (demoMode != 0) {
     menu.visible = false;
@@ -760,9 +760,9 @@ void saveAutoPlayDurationSeconds() {
   saveIntSetting(autoplydFilename, autoPlayDurationSeconds);
 }
 
-void saveDemoMode() {
-  saveByteSetting(demoModeFilename, demoMode);
-}
+//void saveDemoMode() {
+//  saveByteSetting(demoModeFilename, demoMode);
+//}
 
 int loadIntSetting(const char* name, uint8_t maxLength, int defaultValue) {
   if (!sdAvailable)

@@ -78,8 +78,8 @@ class GameSnake : public Runnable {
 
     void newApple() {
       while (true) {
-        apple.x = random(0, 32);
-        apple.y = random(0, 32);
+        apple.x = random(0, 64);
+        apple.y = random(0, 64);
 
         CRGB color = effects.leds[XY(apple.x, apple.y)];
         if (color == black)

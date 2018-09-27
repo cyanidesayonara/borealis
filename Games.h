@@ -24,26 +24,26 @@
 #define Games_H
 
 #include "GameSnake.h"
-#include "GameTetris.h"
+//#include "GameTetris.h"
 
 class Games : public Runnable {
   private:
     Menu gamesMenu;
 
     GameSnake snake;
-    GameTetris tetris;
+//    GameTetris tetris;
     Drawable exit;
 
-    static const uint8_t itemCount = 3;
+    static const uint8_t itemCount = 1;
 
     MenuItem menuItemSnake = MenuItem((char *)"Snake", &snake);
-    MenuItem menuItemTetris = MenuItem((char *)"Tetris", &tetris);
-    MenuItem menuItemExit = MenuItem((char *)"Exit Games", &exit, true);
+//    MenuItem menuItemTetris = MenuItem((char *)"Tetris", &tetris);
+//    MenuItem menuItemExit = MenuItem((char *)"Exit Games", &exit, true);
 
     MenuItem* menuItems[itemCount] = {
       &menuItemSnake,
-      &menuItemTetris,
-      &menuItemExit,
+//      &menuItemTetris,
+//      &menuItemExit,
     };
 
   public:

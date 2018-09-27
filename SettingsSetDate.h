@@ -155,12 +155,12 @@ class SettingsSetDate : public Runnable {
       indexedLayer.swapBuffers();
     }
 
-    unsigned int drawFrame() {
-      backgroundLayer.fillScreen(CRGB(CRGB::Black));
-      backgroundLayer.setFont(font3x5);
-      backgroundLayer.drawString(0, 27, { 255, 255, 255 }, versionText);
-      return 0;
-    }
+//    unsigned int drawFrame() {
+//      backgroundLayer.fillScreen(CRGB(CRGB::Black));
+//      backgroundLayer.setFont(font3x5);
+//      backgroundLayer.drawString(0, 27, { 255, 255, 255 }, versionText);
+//      return 0;
+//    }
 
     void adjust(int d) {
       switch (state) {

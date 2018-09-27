@@ -38,7 +38,7 @@
 #define MSGEQ7_STROBE_PIN 1
 #define MSGEQ7_RESET_PIN 0
 
-const int bandCount = 7;
+const int bandCount = 0;
 // the 10Bit (0-1023) audio band values
 int levels[bandCount];
 int peaks[bandCount];
@@ -48,13 +48,13 @@ bool drawPeaks = true;
 
 int correction[bandCount] = {
   // -64, -76, -115, -120, -106, -116, -141,
-  0, 0, 0, 0, 0, 0, 0,
+  //0, 0, 0, 0, 0, 0, 0,
 };
 
-const uint8_t interpolatedBandCount = 16;
+const uint8_t interpolatedBandCount = 0;
 int interpolatedLevels[interpolatedBandCount];
 
-int horizontalPixelsPerBand = MATRIX_WIDTH / interpolatedBandCount;
+//int horizontalPixelsPerBand = MATRIX_WIDTH / interpolatedBandCount;
 
 int levelsPerVerticalPixel = 1024 / MATRIX_HEIGHT;
 
@@ -73,12 +73,12 @@ uint32_t lowTimer = 0;
 uint32_t highTimer = 0;
 
 // audio scale steps, likely don't need the higher values, but keeping them for testing for now
-const uint8_t audioScaleCount = 12;
+const uint8_t audioScaleCount = 0;
 
 const uint8_t minAudioLevel = 192;
 boolean hasAudio = false;
 
-uint8_t audioScaleMap[audioScaleCount] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+uint8_t audioScaleMap[audioScaleCount] = {  };
 
 // defines where the AGC level starts (I'm having it start high for now)
 uint8_t autoAudioScale = audioScaleMap[audioScaleCount - 1];

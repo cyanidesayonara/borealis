@@ -62,18 +62,18 @@ bool ronixSixButtonRemoteEnabled = true;
 
 // IR Raw Key Codes for SmartMatrix remote
 #define IRCODE_SMARTMATRIX_HELD            0xFFFFFFFF // 4294967295
-#define IRCODE_SMARTMATRIX_POWER           0x1689D02F // 378130479
-#define IRCODE_SMARTMATRIX_BRIGHTNESS_DOWN 0x1689E01F // 378134559
-#define IRCODE_SMARTMATRIX_BRIGHTNESS_UP   0x1689D827 // 378132519
-#define IRCODE_SMARTMATRIX_PLAY            0x168900FF // 378077439
-#define IRCODE_SMARTMATRIX_PALETTE         0x1689C03F // 378126399
-#define IRCODE_SMARTMATRIX_OVERLAY         0x1689807F // 378110079
-#define IRCODE_SMARTMATRIX_UP              0x1689609F // 378101919
-#define IRCODE_SMARTMATRIX_LEFT            0x168910EF // 378081519
-#define IRCODE_SMARTMATRIX_SELECT          0x168938C7 // 378091719
-#define IRCODE_SMARTMATRIX_RIGHT           0x16899867 // 378116199
-#define IRCODE_SMARTMATRIX_BACK            0x168918E7 // 378083559
-#define IRCODE_SMARTMATRIX_DOWN            0x1689B847 // 378124359
+#define IRCODE_SMARTMATRIX_POWER           0x20DF10EF // 551489775
+#define IRCODE_SMARTMATRIX_BRIGHTNESS_DOWN 0x20DFC03F // 551534655
+#define IRCODE_SMARTMATRIX_BRIGHTNESS_UP   0x20DF40BF // 551502015
+#define IRCODE_SMARTMATRIX_PLAY            0x20DFD02F // 551538735
+#define IRCODE_SMARTMATRIX_PALETTE         0x20DF3EC1 // 551501505
+#define IRCODE_SMARTMATRIX_OVERLAY         0x20DFC23D // 551535165
+#define IRCODE_SMARTMATRIX_UP              0x20DF02FD // 551486205
+#define IRCODE_SMARTMATRIX_LEFT            0x20DFE01F // 551542815
+#define IRCODE_SMARTMATRIX_SELECT          0x20DF22DD // 551494365
+#define IRCODE_SMARTMATRIX_RIGHT           0x20DF609F // 551510175
+#define IRCODE_SMARTMATRIX_BACK            0x20DF906F // 551522415
+#define IRCODE_SMARTMATRIX_DOWN            0x20DF827D // 551518845
 
 // IR Raw Key Codes for SparkFun remote
 #define IRCODE_SPARKFUN_HELD               0xFFFFFFFF // 4294967295
@@ -544,17 +544,17 @@ InputCommand readSerialCommand() {
   if (item && item->type == aJson_String) {
     //Serial.print(F("Loading audiopattern "));
     //Serial.println(item->valuestring);
-    if (setAudioPattern(item->valuestring))
-      command = InputCommand::Update;
-    else
+//    if (setAudioPattern(item->valuestring))
+//      command = InputCommand::Update;
+//    else
       command = InputCommand::None;
   }
   else if (item && item->type == aJson_Int) {
     //Serial.print(F("Loading audiopattern "));
     //Serial.println(item->valueint);
-    if (setAudioPattern(item->valueint))
-      command = InputCommand::Update;
-    else
+//    if (setAudioPattern(item->valueint))
+//      command = InputCommand::Update;
+//    else
       command = InputCommand::None;
   }
 
@@ -627,10 +627,10 @@ InputCommand readSerialCommand() {
       listAnimations();
       command = InputCommand::None;
     }
-    else if ((String) item->valuestring == "ListAudioPatterns") {
-      listAudioPatterns();
-      command = InputCommand::None;
-    }
+//    else if ((String) item->valuestring == "ListAudioPatterns") {
+//      listAudioPatterns();
+//      command = InputCommand::None;
+//    }
     else if ((String) item->valuestring == "ListPatterns") {
       listPatterns();
       command = InputCommand::None;

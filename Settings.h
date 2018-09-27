@@ -23,69 +23,69 @@
 #ifndef Settings_H
 #define Settings_H
 
-#include "SettingsBrightness.h"
-#include "SettingsBackgroundBrightness.h"
+//#include "SettingsBrightness.h"
+//#include "SettingsBackgroundBrightness.h"
 #include "SettingsMoveClock.h"
 #include "SettingsSetTime.h"
 #include "SettingsSetDate.h"
 #include "SettingsClockColor.h"
-#include "SettingsClock24Hour.h"
+//#include "SettingsClock24Hour.h"
 #include "SettingsMenuColor.h"
 #include "SettingsMoveMenu.h"
-#include "SettingsAutoplayDuration.h"
-#include "SettingsAudioCalibration.h"
-#include "SettingsUpdateFiles.h"
+//#include "SettingsAutoplayDuration.h"
+//#include "SettingsAudioCalibration.h"
+//#include "SettingsUpdateFiles.h"
 //#include "SettingsDemoMode.h"
 
 class Settings : public Runnable {
   private:
-    SettingsBrightness brightness;
-    SettingsBackgroundBrightness backgroundBrightness;
+    //SettingsBrightness brightness;
+    //SettingsBackgroundBrightness backgroundBrightness;
     SettingsMenuColor menuColor;
     SettingsMoveMenu moveMenu;
     SettingsMoveClock moveClock;
     SettingsClockColor clockColor;
     SettingsSetTime setTime;
     SettingsSetDate setDate;
-    SettingsClock24Hour set24Hour;
-    SettingsAutoplayDuration setAutoplayDuration;
-    SettingsAudioCalibration audioCalibration;
-    SettingsUpdateFiles updateFiles;
+    //SettingsClock24Hour set24Hour;
+    //SettingsAutoplayDuration setAutoplayDuration;
+    //SettingsAudioCalibration audioCalibration;
+    //SettingsUpdateFiles updateFiles;
     //SettingsDemoMode demoMode;
-    Drawable exit;
+    //Drawable exit;
 
-    static const int itemCount = 13;
+    static const int itemCount = 6;
 
-    MenuItem menuItemBrightness = MenuItem((char *)"Brightness", &brightness);
-    MenuItem menuItemBgBrightness = MenuItem((char *)"BG Brightness", &backgroundBrightness);
+    //MenuItem menuItemBrightness = MenuItem((char *)"Brightness", &brightness);
+    //MenuItem menuItemBgBrightness = MenuItem((char *)"BG Brightness", &backgroundBrightness);
     MenuItem menuItemMenuColor = MenuItem((char *)"Menu Color", &menuColor);
     MenuItem menuItemMoveMenu = MenuItem((char *)"Move Menu", &moveMenu);
-    MenuItem menuItemAutoplayDuration = MenuItem((char *)"Autoplay Duration", &setAutoplayDuration);
+    //MenuItem menuItemAutoplayDuration = MenuItem((char *)"Autoplay Duration", &setAutoplayDuration);
     MenuItem menuItemMoveClock = MenuItem((char *)"Move Clock", &moveClock);
     MenuItem menuItemClockColor = MenuItem((char *)"Clock Color", &clockColor);
-    MenuItem menuItemClock24Hour = MenuItem((char *)"12/24 Hour Clock", &set24Hour);
+    //MenuItem menuItemClock24Hour = MenuItem((char *)"12/24 Hour Clock", &set24Hour);
     MenuItem menuItemSetTime = MenuItem((char *)"Set Time", &setTime);
     MenuItem menuItemSetDate = MenuItem((char *)"Set Date", &setDate);
-    MenuItem menuItemNoiseReduction = MenuItem((char *)"Audio Calibration", &audioCalibration);
-    MenuItem menuItemUpdateFiles = MenuItem((char *)"Update Files", &updateFiles);
+    //MenuItem menuItemNoiseReduction = MenuItem((char *)"Audio Calibration", &audioCalibration);
+    //MenuItem menuItemUpdateFiles = MenuItem((char *)"Update Files", &updateFiles);
     //MenuItem menuItemDemoMode = MenuItem((char *)"Demo Mode", &demoMode);
-    MenuItem menuItemExit = MenuItem((char *)"Exit Settings", &exit, true);
+    //MenuItem menuItemExit = MenuItem((char *)"Exit Settings", &exit, true);
 
     MenuItem* menuItems[itemCount] = {
-      &menuItemBrightness,
-      &menuItemBgBrightness,
+      //&menuItemBrightness,
+      //&menuItemBgBrightness,
       &menuItemMenuColor,
       &menuItemMoveMenu,
-      &menuItemAutoplayDuration,
+      //&menuItemAutoplayDuration,
       &menuItemMoveClock,
       &menuItemClockColor,
-      &menuItemClock24Hour,
+      //&menuItemClock24Hour,
       &menuItemSetTime,
       &menuItemSetDate,
-      &menuItemNoiseReduction,
-      &menuItemUpdateFiles,
+      //&menuItemNoiseReduction,
+      //&menuItemUpdateFiles,
       //&menuItemDemoMode,
-      &menuItemExit,
+      //&menuItemExit,
     };
 
     File imageFile;
@@ -97,7 +97,7 @@ class Settings : public Runnable {
       if (imageFile)
         imageFile.close();
 
-      char filepath [] = "/aurora/gearblue.gif"; // gearblu2.gif
+      char filepath [] = "/aurora/gear.gif"; // gearblu2.gif
 
       if (!SD.exists(filepath))
         return;
@@ -131,7 +131,7 @@ class Settings : public Runnable {
     char* Drawable::name = (char *)"Settings";
 
     void load() {
-      audioCalibration.load();
+//      audioCalibration.load();
       menuY = loadByteSetting(menuYFilename, 11);
     }
 
@@ -140,11 +140,11 @@ class Settings : public Runnable {
 
       menuItemMoveClock.visible = isTimeAvailable;
       menuItemClockColor.visible = isTimeAvailable;
-      menuItemClock24Hour.visible = isTimeAvailable;
+//      menuItemClock24Hour.visible = isTimeAvailable;
       menuItemSetTime.visible = isTimeAvailable;
       menuItemSetDate.visible = isTimeAvailable;
 
-      menuItemUpdateFiles.visible = *(unsigned long *)0x38080 != 0xffffffff && sdAvailable;
+//      menuItemUpdateFiles.visible = *(unsigned long *)0x38080 != 0xffffffff && sdAvailable;
 
       settingsMenu.canMoveBack = true;
       settingsMenu.run(menuItems, itemCount);
