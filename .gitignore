@@ -17,3 +17,6 @@ Visual Micro
 Thumbs.db
 *.sln
 *.vcxproj
+
+.vscode
+.idea
