@@ -1,7 +1,10 @@
 Borealis is a rehash of a project I made some years back, in the spring of 2016.
 
 It's a fork of the Aurora project (https://github.com/pixelmatix/aurora)
-by Pixelmatic, which is a dynamic LED display visualizer.
+by Pixelmatic, a dynamic LED display visualizer.
+
+Borealis in action  
+![Borealis in action](demo.gif)
 
 The LED display is built from two pieces of HUB75 64x32 Pixel LED panel,
 forming a single 64x64 pixel display. The display is driven by a Teensy 3.2
