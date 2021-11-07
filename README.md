@@ -37,11 +37,13 @@ basics :).
   Tools -> Board -> Teensy 3.2 / 3.1
 * Set target USB port  
   Tools -> Port
-* Download and unzip aJson & SmartMatrix3 into your \Arduino\libraries\ folder  
+* Download and unzip aJson & SmartMatrix3 into your /Arduino/libraries folder  
   https://github.com/interactive-matter/aJson/tree/ae3d01b3115f7c1379f8f33e407aa93e3812a7f6  
   https://github.com/pixelmatix/SmartMatrix3
 * Open Borealis.ino in Arduino IDE and upload it to your Teensy  
   Sketch -> Upload
+* Use Serial monitor for logging and debugging  
+  Tools -> Serial Monitor
 
 # Further reading
 

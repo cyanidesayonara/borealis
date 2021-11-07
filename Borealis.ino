@@ -37,6 +37,8 @@ const uint8_t kBackgroundLayerOptions = (SM_BACKGROUND_OPTIONS_NONE);
 const uint8_t kScrollingLayerOptions = (SM_SCROLLING_OPTIONS_NONE);
 const uint8_t kIndexedLayerOptions = (SM_INDEXED_OPTIONS_NONE);
 
+// Global variables use 63,536 bytes (96%) of dynamic memory, leaving 2,000 bytes for local variables. Maximum is 65,536 bytes
+
 #define MATRIX_HEIGHT kMatrixHeight
 #define MATRIX_WIDTH kMatrixWidth
 
@@ -71,9 +73,6 @@ char* auroraPath = (char *) "/aurora/";
 
 #include <aJSON.h>
 
-#define GAMES 0
-#define WEATHER 0
-
 SMARTMATRIX_ALLOCATE_BUFFERS(matrix, kMatrixWidth, kMatrixHeight, kRefreshDepth, kDmaBufferRows, kPanelType, kMatrixOptions);
 SMARTMATRIX_ALLOCATE_BACKGROUND_LAYER(backgroundLayer, kMatrixWidth, kMatrixHeight, COLOR_DEPTH, kBackgroundLayerOptions);
 SMARTMATRIX_ALLOCATE_SCROLLING_LAYER(scrollingLayer, kMatrixWidth, kMatrixHeight, COLOR_DEPTH, kScrollingLayerOptions);
@@ -92,7 +91,7 @@ boolean hasTeensyRTC = false;
 
 rotationDegrees rotation = rotation0;
 
-uint8_t brightness = 255;
+uint8_t brightness = 1;
 uint8_t backgroundBrightness = 255;
 
 const uint8_t brightnessCount = 5;
@@ -184,11 +183,8 @@ ClockDigitalShort clockDigitalShort;
 #include "ClockText.h"
 ClockText clockText;
 
-//#include "ClockCountdown.h"
-//ClockCountdown clockCountdown;
-
-//#include "ClockPong.h"
-//ClockPong clockPong;
+// #include "ClockPong.h"
+// ClockPong clockPong;
 
 #include "ClockDisplay.h"
 ClockDisplay clockDisplay;
@@ -196,16 +192,8 @@ ClockDisplay clockDisplay;
 #include "Patterns.h"
 Patterns patterns;
 
-//#include "AudioPatterns.h"
-//AudioPatterns audioPatterns;
-
 #include "Animations.h"
 Animations animations;
-
-#if WEATHER > 0
-#include "Weather.h"
-Weather weather;
-#endif
 
 #include "Bitmaps.h"
 
@@ -213,46 +201,25 @@ rgb24 menuColor = CRGB(CRGB::Blue);
 int menuY = MATRIX_HEIGHT / 2 - 4;
 int autoPlayDurationSeconds = 10;
 
-//#include "StreamingMode.h"
-//StreamingMode streamingMode;
-
 #include "MenuItem.h"
 #include "Menu.h"
 Menu menu;
 
-#if GAMES > 0
-#include <QueueArray.h>
-#include "Games.h"
-Games games;
-#endif
 #include "Settings.h"
 Settings settings;
 
 #include "SettingsSetTime.h"
 #include "SettingsMoveClock.h"
 
-//MenuItem menuItemAudioPatterns = MenuItem(audioPatterns.name, &audioPatterns);
 MenuItem menuItemPatterns = MenuItem(patterns.name, &patterns);
 MenuItem menuItemAnimations = MenuItem(animations.name, &animations);
-#if GAMES > 0
-MenuItem menuItemGames = MenuItem(games.name, &games);
-#endif
-#if WEATHER > 0
-MenuItem menuItemWeather = MenuItem(weather.name, &weather);
-#endif
+
 MenuItem menuItemSettings = MenuItem(settings.name, &settings);
 
 // Main Menu
 MenuItem* mainMenuItems [] = {
-//  &menuItemAudioPatterns,
   &menuItemPatterns,
   &menuItemAnimations,
-#if GAMES > 0
-  &menuItemGames,
-#endif
-#if WEATHER > 0
-  &menuItemWeather,
-#endif
   &menuItemSettings,
 };
 
@@ -357,10 +324,6 @@ void setup()
     loadRotationSetting();
     enableAudioPatterns = loadByteSetting("enaudpat.txt", 1) > 0;
 
-#if GAMES > 0
-    menuItemGames.visible = loadByteSetting("gamesvis.txt", 1) > 0;
-#endif
-
     clockDisplay.loadSettings();
 
     loadOverlaySettings();
@@ -381,10 +344,6 @@ void setup()
     menu.playMode = Menu::PlaybackState::Autoplay;
     menu.visible = false;
   }
-
-//  menuItemAudioPatterns.visible = enableAudioPatterns;
-//  menuItemAudioPatterns.playModeEnabled = true;
-//  menuItemAudioPatterns.paletteEnabled = true;
 
   menuItemPatterns.playModeEnabled = true;
   menuItemPatterns.paletteEnabled = true;

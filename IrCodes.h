@@ -62,18 +62,18 @@ bool ronixSixButtonRemoteEnabled = true;
 
 // IR Raw Key Codes for SmartMatrix remote
 #define IRCODE_SMARTMATRIX_HELD            0xFFFFFFFF // 4294967295
-#define IRCODE_SMARTMATRIX_POWER           0x20DF10EF // 551489775
-#define IRCODE_SMARTMATRIX_BRIGHTNESS_DOWN 0x20DFC03F // 551534655
-#define IRCODE_SMARTMATRIX_BRIGHTNESS_UP   0x20DF40BF // 551502015
+#define IRCODE_SMARTMATRIX_POWER           4105841032
+#define IRCODE_SMARTMATRIX_BRIGHTNESS_DOWN 412973352
+#define IRCODE_SMARTMATRIX_BRIGHTNESS_UP   1595074756
 #define IRCODE_SMARTMATRIX_PLAY            0x20DFD02F // 551538735
-#define IRCODE_SMARTMATRIX_PALETTE         0x20DF3EC1 // 551501505
-#define IRCODE_SMARTMATRIX_OVERLAY         0x20DFC23D // 551535165
-#define IRCODE_SMARTMATRIX_UP              0x20DF02FD // 551486205
-#define IRCODE_SMARTMATRIX_LEFT            0x20DFE01F // 551542815
-#define IRCODE_SMARTMATRIX_SELECT          0x20DF22DD // 551494365
-#define IRCODE_SMARTMATRIX_RIGHT           0x20DF609F // 551510175
-#define IRCODE_SMARTMATRIX_BACK            0x20DF906F // 551522415
-#define IRCODE_SMARTMATRIX_DOWN            0x20DF827D // 551518845
+#define IRCODE_SMARTMATRIX_PALETTE         2308325960
+#define IRCODE_SMARTMATRIX_OVERLAY         1908947622
+#define IRCODE_SMARTMATRIX_UP              3261853764
+#define IRCODE_SMARTMATRIX_LEFT            1972149634
+#define IRCODE_SMARTMATRIX_SELECT          2331063592
+#define IRCODE_SMARTMATRIX_RIGHT           1400905448
+#define IRCODE_SMARTMATRIX_BACK            1003313352
+#define IRCODE_SMARTMATRIX_DOWN            3305092678
 
 // IR Raw Key Codes for SparkFun remote
 #define IRCODE_SPARKFUN_HELD               0xFFFFFFFF // 4294967295
@@ -247,94 +247,9 @@ unsigned long waitForIRCode() {
 }
 
 InputCommand getCommand(unsigned long input) {
-  if (adafruitRemoteEnabled) {
-    switch (input) {
-      case IRCODE_ADAFRUIT_UP:
-        return InputCommand::Up;
-
-      case IRCODE_ADAFRUIT_DOWN:
-        return InputCommand::Down;
-
-      case IRCODE_ADAFRUIT_LEFT:
-        return InputCommand::Left;
-
-      case IRCODE_ADAFRUIT_RIGHT:
-        return InputCommand::Right;
-
-      case IRCODE_ADAFRUIT_ENTER_SAVE:
-        return InputCommand::Select;
-
-      case IRCODE_ADAFRUIT_STOP_MODE:
-      case IRCODE_ADAFRUIT_1:
-        return InputCommand::PlayMode;
-
-      case IRCODE_ADAFRUIT_2:
-        return InputCommand::Palette;
-
-      case IRCODE_ADAFRUIT_3:
-        return InputCommand::CycleClockAndMessageFiles;
-
-      case IRCODE_ADAFRUIT_PLAY_PAUSE:
-        return InputCommand::Power;
-
-      case IRCODE_ADAFRUIT_BACK:
-        return InputCommand::Back;
-
-      case IRCODE_ADAFRUIT_VOLUME_UP:
-        return InputCommand::BrightnessUp;
-
-      case IRCODE_ADAFRUIT_VOLUME_DOWN:
-        return InputCommand::BrightnessDown;
-
-      case IRCODE_ADAFRUIT_SETUP:
-        return InputCommand::Menu;
-
-      case IRCODE_ADAFRUIT_5:
-        return InputCommand::ToggleSettingsMenuVisibility;
-
-      case IRCODE_ADAFRUIT_6:
-        return InputCommand::AudioScaleUp;
-
-      case IRCODE_ADAFRUIT_7:
-        return InputCommand::FreezeDisplay;
-
-      case IRCODE_ADAFRUIT_9:
-        return InputCommand::AudioScaleDown;
-
-      case IRCODE_ADAFRUIT_0_10_PLUS:
-        return InputCommand::ShowPatternName;
-    }
-  }
-
-  if (sparkfunRemoteEnabled) {
-    switch (input) {
-      case IRCODE_SPARKFUN_UP:
-        return InputCommand::Up;
-
-      case IRCODE_SPARKFUN_DOWN:
-        return InputCommand::Down;
-
-      case IRCODE_SPARKFUN_LEFT:
-        return InputCommand::Left;
-
-      case IRCODE_SPARKFUN_RIGHT:
-        return InputCommand::Right;
-
-      case IRCODE_SPARKFUN_SELECT:
-        return InputCommand::Select;
-
-      case IRCODE_SPARKFUN_POWER:
-        return InputCommand::CycleBrightness;
-
-      case IRCODE_SPARKFUN_A:
-        return InputCommand::PlayMode;
-
-      case IRCODE_SPARKFUN_B:
-        return InputCommand::Palette;
-
-      case IRCODE_SPARKFUN_C:
-        return InputCommand::CycleClockAndMessageFiles;
-    }
+  if (input != 0) {
+    Serial.print("IR Code: ");
+    Serial.println(input);
   }
 
   if (smartMatrixRemoteEnabled) {
@@ -374,28 +289,6 @@ InputCommand getCommand(unsigned long input) {
 
       case IRCODE_SMARTMATRIX_BRIGHTNESS_DOWN:
         return InputCommand::BrightnessDown;
-    }
-  }
-
-  if (ronixSixButtonRemoteEnabled) {
-    switch (input) {
-      case IRCODE_RONIX_SIX_BUTTON_UP:
-        return InputCommand::Up;
-
-      case IRCODE_RONIX_SIX_BUTTON_DOWN:
-        return InputCommand::Down;
-
-      case IRCODE_RONIX_SIX_BUTTON_LEFT:
-        return InputCommand::Left;
-
-      case IRCODE_RONIX_SIX_BUTTON_RIGHT:
-        return InputCommand::Right;
-
-      case IRCODE_RONIX_SIX_BUTTON_SELECT:
-        return InputCommand::Select;
-
-      case IRCODE_RONIX_SIX_BUTTON_M:
-        return InputCommand::CycleBrightness;
     }
   }
 
