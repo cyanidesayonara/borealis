@@ -1,7 +1,7 @@
 Borealis is a rehash of a project I made some years back, in the spring of 2016.
 
 It's a fork of the Aurora project (https://github.com/pixelmatix/aurora) by
-Pixelmatic, a dynamic LED display visualizer.
+Pixelmatix, a dynamic LED display visualizer.
 
 More specifically, it's a fork of the aurora64 branch, which adapts the software
 to a display four times the size of the original 32x32 pixel display.
@@ -14,7 +14,12 @@ developed and uploaded onto the Teensy using the Arduino IDE and the teensyduino
 plugin.
 
 Borealis in action  
-![Borealis in action](demo.gif)
+
+![Borealis in action 1](demo1.gif)
+
+![Borealis in action 2](demo2.gif)
+
+![Borealis in action 3](demo3.gif)
 
 Fun fact: I built this thing before I actually knew how to code at all. Like I
 had basically never even seen code before. So all I really did was change some
@@ -28,18 +33,24 @@ basics :).
 
 # Start developing
 
-* Install Arduino IDE 1.6.5  
+* Install Arduino IDE 1.6.5 (important: newer versions won't work)  
   https://www.arduino.cc/en/main/OldSoftwareReleases
-* Install teensyduino 1.25  
-  https://www.pjrc.com/teensy/td_download.html
+* Install teensyduino 1.27 (run as administrator)  
+  https://www.pjrc.com/teensy/td_download.html  
+  Choose the follwing libraries to install: 
+  * DS1307RTC
+  * FastLED
+  * Time
 * Plug in your Teensy and Start Arduino IDE
 * Set Teensy as target board  
   Tools -> Board -> Teensy 3.2 / 3.1
 * Set target USB port  
   Tools -> Port
-* Download and unzip aJson & SmartMatrix3 into your /Arduino/libraries folder  
+* Download aJson & SmartMatrix3  
   https://github.com/interactive-matter/aJson/tree/ae3d01b3115f7c1379f8f33e407aa93e3812a7f6  
-  https://github.com/pixelmatix/SmartMatrix3
+  https://github.com/pixelmatix/SmartMatrix3  
+  Go to Code -> Download Zip
+* Unzip aJson & SmartMatrix3 into your /Arduino/libraries folder
 * Open Borealis.ino in Arduino IDE and upload it to your Teensy  
   Sketch -> Upload
 * Use Serial monitor for logging and debugging  
