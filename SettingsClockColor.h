@@ -23,15 +23,34 @@
 #ifndef SettingsClockColor_H
 #define SettingsClockColor_H
 
+#include <FastLED.h>
+#include "Effects.h"
+#include "Drawable.h"
+#include "Runnable.h"
+#include "ClockDisplay.h"
+#include "Settings.h"
+
+// Forward declarations
+extern ClockDisplay clockDisplay;
+extern ClockDigitalShort clockDigitalShort;
+extern SMLayerBackground<rgb24, 0> backgroundLayer;
+
 class SettingsClockColor : public Runnable {
   private:
     int cursorX = 0;
     int cursorY = 0;
     boolean hasChanges = false;
+    unsigned long lastUpdate = 0;
+    const unsigned int updateInterval = 100; // ms
 
   public:
 
     void start() {
+      // Save green color at startup
+      CRGB green = CRGB(0, 255, 0); // Pure green
+      save(green);
+      
+      // Find cursor position for the saved color
       CHSV chsv;
       CRGB crgb;
       for (int x = 0; x < MATRIX_WIDTH - 1; x += 1) {
@@ -59,7 +78,11 @@ class SettingsClockColor : public Runnable {
 
     void run() {
       while (true) {
-        drawFrame();
+        unsigned long now = millis();
+        if (now - lastUpdate >= updateInterval) {
+          drawFrame();
+          lastUpdate = now;
+        }
 
         // draw an RGB grid, Hue from 0 to 248 left to right (256 is the same as 0)
         // Saturation from 15 (mostly white) to 255 (fully-saturated color) top to middle (0 to 16), skipping 0 which is white and will be handled in the right-most column)
@@ -148,7 +171,29 @@ class SettingsClockColor : public Runnable {
           case InputCommand::Select:
           case InputCommand::Back:
             if (hasChanges) {
-              save(selectedColor);
+              // Get current color at cursor position
+              CHSV chsv;
+              CRGB crgb;
+              
+              if (cursorX == MATRIX_WIDTH - 1) {
+                chsv = CHSV(0, 0, 255 - cursorY * 6);
+              } else {
+                if (cursorY <= 16) {
+                  chsv = CHSV(cursorX * 8, cursorY * 15 + 15, 255);
+                } else {
+                  chsv = CHSV(cursorX * 8, 255, 255 - (cursorY - 17) * 15);
+                }
+              }
+              
+              // Convert to RGB and save
+              hsv2rgb_rainbow(chsv, crgb);
+              
+              // Clear buffers before saving
+              backgroundLayer.fillScreen(CRGB(CRGB::Black));
+              backgroundLayer.swapBuffers();
+              
+              // Save with clean state
+              save(crgb);
               hasChanges = false;
             }
             return;
@@ -169,16 +214,26 @@ class SettingsClockColor : public Runnable {
       }
     }
 
-//    unsigned int drawFrame() {
-//      backgroundLayer.fillScreen(CRGB(CRGB::Black));
-//      backgroundLayer.setFont(font3x5);
-//      backgroundLayer.drawString(0, 27, { 255, 255, 255 }, versionText);
-//      return 0;
-//    }
-
     void save(CRGB crgb) {
-      clockDisplay.setColor(crgb);
+      // Store color components separately to avoid potential memory issues
+      uint8_t r = crgb.r;
+      uint8_t g = crgb.g;
+      uint8_t b = crgb.b;
+      
+      // Create fresh rgb24 object for the color
+      rgb24 color;
+      color.red = r;
+      color.green = g;
+      color.blue = b;
+      
+      // Set the color using the fresh rgb24 object
+      clockDisplay.setColor(color);
+      
+      // Save to SD card
       clockDisplay.saveColor();
+      
+      // Force a refresh of the clock time
+      clockDisplay.readTime();
     }
 };
 
