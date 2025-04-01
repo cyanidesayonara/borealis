@@ -260,7 +260,7 @@ class Animations : public Playlist {
       return count;
     }
 
-    void openImageFile(boolean reopen) {
+    void openImageFile(bool reopen) {
       if (!sdAvailable || imageCount < 1)
         return;
 

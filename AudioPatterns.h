@@ -986,7 +986,7 @@ class AudioPatterns : public Playlist {
 
 //    PVector gravity = PVector(0, 0.0250);
 //    PVector impulse = PVector(0, 0);
-//    boolean startedAttractor = false;
+//    bool startedAttractor = false;
 //    void bounce() {
 //      const int count = 32;
 //
@@ -1217,7 +1217,7 @@ class AudioPatterns : public Playlist {
     //      effects.standardNoiseSmearing();
     //    }
     //
-    //    boolean peakhandled = false;
+    //    bool peakhandled = false;
     //
     //    void radialPixels() {
     //      effects.DimAll(230);

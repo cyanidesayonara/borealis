@@ -39,7 +39,7 @@ class SettingsClockColor : public Runnable {
   private:
     int cursorX = 0;
     int cursorY = 0;
-    boolean hasChanges = false;
+    bool hasChanges = false;
     unsigned long lastUpdate = 0;
     const unsigned int updateInterval = 100; // ms
 

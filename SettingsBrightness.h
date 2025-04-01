@@ -25,7 +25,7 @@
 
 class SettingsBrightness : public Runnable {
   private:
-    boolean hasChanges = false;
+    bool hasChanges = false;
     char text[4];
 
   public:

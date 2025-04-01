@@ -29,7 +29,7 @@ public:
         return true;
     }
     
-    boolean isCurrentItemFinished = true;
+    bool isCurrentItemFinished = true;
 
     virtual void move(int step) = 0;
     virtual void moveRandom(int step) = 0;

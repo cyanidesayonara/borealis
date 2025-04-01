@@ -81,13 +81,13 @@ SMARTMATRIX_ALLOCATE_INDEXED_LAYER(indexedLayer, kMatrixWidth, kMatrixHeight, CO
 char versionText [] = "v1.7";
 
 elapsedMillis sinceStatusLedToggled;
-boolean statusLedState = false;
+bool statusLedState = false;
 
 bool sdAvailable = false;
 IRrecv irReceiver(IR_RECV_PIN);
 
-boolean hasDS1307RTC = false;
-boolean hasTeensyRTC = false;
+bool hasDS1307RTC = false;
+bool hasTeensyRTC = false;
 
 rotationDegrees rotation = rotation0;
 
@@ -151,7 +151,7 @@ void restartAndJumpToApp(void);
 void updateStatusLed();
 int getBrightnessLevel();
 int getBackgroundBrightnessLevel();
-void adjustBrightness(int delta, boolean wrap);
+void adjustBrightness(int delta, bool wrap);
 uint8_t cycleBrightness();
 void adjustBackgroundBrightness(int d);
 void loadSettings();
@@ -619,7 +619,7 @@ int getBackgroundBrightnessLevel() {
   return level;
 }
 
-void adjustBrightness(int delta, boolean wrap) {
+void adjustBrightness(int delta, bool wrap) {
   int level = getBrightnessLevel();
 
   level += delta;

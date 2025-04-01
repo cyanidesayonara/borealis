@@ -53,7 +53,7 @@ struct Vertex
 struct EdgePoint
 {
     int x, y;
-    boolean visible;
+    bool visible;
 
     EdgePoint()
     {

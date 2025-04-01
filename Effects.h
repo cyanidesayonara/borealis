@@ -134,7 +134,7 @@ public:
 //    DimAll(value);
 //
 //    for (uint8_t offset = 0; offset < MATRIX_CENTER_X; offset++) {
-//      boolean hasprev = false;
+//      bool hasprev = false;
 //      uint16_t prevxy = 0;
 //
 //      for (uint8_t theta = 0; theta < 255; theta++) {

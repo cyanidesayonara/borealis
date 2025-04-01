@@ -76,7 +76,7 @@ uint32_t highTimer = 0;
 const uint8_t audioScaleCount = 0;
 
 const uint8_t minAudioLevel = 192;
-boolean hasAudio = false;
+bool hasAudio = false;
 
 uint8_t audioScaleMap[audioScaleCount] = {  };
 

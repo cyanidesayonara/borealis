@@ -133,10 +133,10 @@ private:
 
 public:
 
-    boolean haveReceivedData = false;
+    bool haveReceivedData = false;
 
-    boolean handleStreaming() {
-        boolean receivedData = false;
+    bool handleStreaming() {
+        bool receivedData = false;
 
         // Make sure serial data is waiting
         if (Serial.available() > 0) {

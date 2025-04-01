@@ -42,25 +42,25 @@ public:
   bool clockVisible = false;
   bool messageVisible = false;
 
-  unsigned int playMode = Paused;
+  PlaybackState playMode = Paused;
   unsigned int autoPlayTimeout = 0;
   bool playModeChanged = false;
   bool showingPlayModeIndicator = false;
-  unsigned int playModeIndicatorTimout = 0;
+  unsigned long playModeIndicatorTimeout = 0;
   unsigned int playModeIndicatorDuration = 2000;
 
   bool brightnessChanged = false;
   bool showingBrightnessIndicator = false;
-  unsigned int brightnessIndicatorTimout = 0;
+  unsigned long brightnessIndicatorTimeout = 0;
   unsigned int brightnessIndicatorDuration = 1000;
 
   bool paletteChanged = false;
   bool showingPaletteIndicator = false;
-  unsigned int paletteIndicatorTimout = 0;
+  unsigned long paletteIndicatorTimeout = 0;
   unsigned int paletteIndicatorDuration = 2000;
 
   bool showingPatternIndicator = false;
-  unsigned int patternIndicatorTimout = 0;
+  unsigned int patternIndicatorTimeout = 0;
   unsigned int patternIndicatorDuration = 1000;
 
   bool updateScrollText = false;
@@ -71,10 +71,15 @@ public:
 
   uint8_t overlayIndex = 0;
 
-//  boolean wasStreaming = false;
-//  boolean visibleBeforeStreaming = true;
+//  bool wasStreaming = false;
+//  bool visibleBeforeStreaming = true;
 
-  boolean freezeDisplay = false;
+  bool freezeDisplay = false;
+
+  bool audioScaleChanged = false;
+  bool showingAudioScaleIndicator = false;
+  unsigned long audioScaleIndicatorTimeout = 0;
+  unsigned int audioScaleIndicatorDuration = 1000;
 
   void run(MenuItem* menuItems [], int menuItemsCount) {
     while (true) {
@@ -131,7 +136,7 @@ public:
           effects.CyclePalette(-1);
           paletteChanged = true;
           showingPaletteIndicator = true;
-          paletteIndicatorTimout = millis() + paletteIndicatorDuration;
+          paletteIndicatorTimeout = millis() + paletteIndicatorDuration;
         }
         else if (command == InputCommand::Left && showingPlayModeIndicator && !isHolding && currentMenuItem->playModeEnabled) {
           adjustPlayMode(-1);
@@ -151,7 +156,7 @@ public:
           effects.CyclePalette(1);
           paletteChanged = true;
           showingPaletteIndicator = true;
-          paletteIndicatorTimout = millis() + paletteIndicatorDuration;
+          paletteIndicatorTimeout = millis() + paletteIndicatorDuration;
         }
         else if (command == InputCommand::Right && showingPlayModeIndicator && !isHolding && currentMenuItem->playModeEnabled) {
           adjustPlayMode(1);
@@ -222,7 +227,7 @@ public:
           if (!wasHolding) {
             brightnessChanged = true;
             showingBrightnessIndicator = true;
-            brightnessIndicatorTimout = millis() + brightnessIndicatorDuration;
+            brightnessIndicatorTimeout = millis() + brightnessIndicatorDuration;
           }
         }
         else if (command == InputCommand::Power) {
@@ -236,14 +241,14 @@ public:
           saveBrightnessSetting();
           brightnessChanged = true;
           showingBrightnessIndicator = true;
-          brightnessIndicatorTimout = millis() + brightnessIndicatorDuration;
+          brightnessIndicatorTimeout = millis() + brightnessIndicatorDuration;
         }
         else if (command == InputCommand::BrightnessDown) {
           adjustBrightness(-1, false);
           saveBrightnessSetting();
           brightnessChanged = true;
           showingBrightnessIndicator = true;
-          brightnessIndicatorTimout = millis() + brightnessIndicatorDuration;
+          brightnessIndicatorTimeout = millis() + brightnessIndicatorDuration;
         }
         else if (command == InputCommand::PlayMode && !isHolding && currentMenuItem->playModeEnabled) { // cycle play mode (pause/play/random)
           if (showingPlayModeIndicator) adjustPlayMode(1);
@@ -254,7 +259,7 @@ public:
             effects.CyclePalette();
           paletteChanged = true;
           showingPaletteIndicator = true;
-          paletteIndicatorTimout = millis() + paletteIndicatorDuration;
+          paletteIndicatorTimeout = millis() + paletteIndicatorDuration;
         }
         else if (command == InputCommand::ShowClock) {
           messageVisible = false;
@@ -344,7 +349,7 @@ public:
         else if (command == InputCommand::ShowPatternName) {
           showingPatternIndicator = true;
           updateScrollText = true;
-          patternIndicatorTimout = millis() + patternIndicatorDuration;
+          patternIndicatorTimeout = millis() + patternIndicatorDuration;
         }
         else if (command == InputCommand::FreezeDisplay) {
           freezeDisplay = !freezeDisplay;
@@ -381,7 +386,7 @@ public:
     else if (playMode == Paused && d < 0)
       playMode = Random;
     else
-      playMode += d;
+      playMode = static_cast<PlaybackState>(playMode + d);
 
     if (playMode != Paused) {
       autoPlayTimeout = millis() + (autoPlayDurationSeconds * 1000);
@@ -389,7 +394,7 @@ public:
 
     playModeChanged = true;
     showingPlayModeIndicator = true;
-    playModeIndicatorTimout = millis() + playModeIndicatorDuration;
+    playModeIndicatorTimeout = millis() + playModeIndicatorDuration;
   }
 
 private:
@@ -418,27 +423,27 @@ private:
   }
 
   void updateForeground(MenuItem* menuItems [], int menuItemsCount) {
-    if (showingPlayModeIndicator && millis() >= playModeIndicatorTimout) {
+    if (showingPlayModeIndicator && millis() >= playModeIndicatorTimeout) {
       showingPlayModeIndicator = false;
       updateScrollText = true;
     }
 
-    if (showingBrightnessIndicator && millis() >= brightnessIndicatorTimout) {
+    if (showingBrightnessIndicator && millis() >= brightnessIndicatorTimeout) {
       showingBrightnessIndicator = false;
       updateScrollText = true;
     }
 
-    if (showingAudioScaleIndicator && millis() >= audioScaleIndicatorTimout) {
+    if (showingAudioScaleIndicator && millis() >= audioScaleIndicatorTimeout) {
       showingAudioScaleIndicator = false;
       updateScrollText = true;
     }
 
-    if (showingPaletteIndicator && millis() >= paletteIndicatorTimout) {
+    if (showingPaletteIndicator && millis() >= paletteIndicatorTimeout) {
       showingPaletteIndicator = false;
       updateScrollText = true;
     }
 
-    if (showingPatternIndicator && millis() >= patternIndicatorTimout) {
+    if (showingPatternIndicator && millis() >= patternIndicatorTimeout) {
       showingPatternIndicator = false;
       updateScrollText = true;
     }
@@ -563,7 +568,7 @@ private:
     // account for any time spent drawing the clock, swapping buffers, etc.
     unsigned int startTime = millis();
 
-//    boolean streaming = streamingMode.handleStreaming();
+//    bool streaming = streamingMode.handleStreaming();
 //
 //    if (streaming && !wasStreaming) {
 //      wasStreaming = true;

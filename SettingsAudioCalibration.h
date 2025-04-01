@@ -27,9 +27,9 @@ class SettingsAudioCalibration : public Runnable {
   private:
     int currentBandIndex = 0;
     uint8_t audioScaleBefore = 0;
-    boolean hasChanges = false;
+    bool hasChanges = false;
 
-    boolean selectingMode = true; // start in mode selection
+    bool selectingMode = true; // start in mode selection
     int mode = 0; // start in manual
 
     const int manualMode = 0;

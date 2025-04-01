@@ -133,7 +133,7 @@ class PatternCube : public Drawable {
         pb = screen + face[i].sommets[1];
         pc = screen + face[i].sommets[2];
 
-        boolean back = ((pb->x - pa->x) * (pc->y - pa->y) - (pb->y - pa->y) * (pc->x - pa->x)) < 0;
+        bool back = ((pb->x - pa->x) * (pc->y - pa->y) - (pb->y - pa->y) * (pc->x - pa->x)) < 0;
         if (!back)
         {
           int j;

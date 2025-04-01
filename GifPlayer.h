@@ -81,7 +81,7 @@ class GifPlayer {
     int tbiWidth;
     int tbiHeight;
     int tbiPackedBits;
-    boolean tbiInterlaced;
+    bool tbiInterlaced;
 
     int frameDelay;
     int transparentColorIndex;
@@ -89,7 +89,7 @@ class GifPlayer {
     int prevDisposalMethod;
     int disposalMethod;
     int lzwCodeSize;
-    boolean keyFrame;
+    bool keyFrame;
     int rectX;
     int rectY;
     int rectWidth;
@@ -359,7 +359,7 @@ class GifPlayer {
 #endif
 
       // Does this image have a local color table ?
-      boolean localColorTable = ((tbiPackedBits & COLORTBLFLAG) != 0);
+      bool localColorTable = ((tbiPackedBits & COLORTBLFLAG) != 0);
 
       if (localColorTable) {
         int colorBits = ((tbiPackedBits & 7) + 1);
@@ -702,7 +702,7 @@ the_end:
     }
 
     // Make sure the file is a Gif file
-    boolean parseGifHeader() {
+    bool parseGifHeader() {
 
       char buffer[10];
 
@@ -766,7 +766,7 @@ the_end:
       Serial.println(F("\nParsing Data Block"));
 #endif
 
-      boolean done = false;
+      bool done = false;
       while (!done) {
 
 #if 0 && DEBUG == 1

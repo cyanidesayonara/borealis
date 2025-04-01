@@ -25,7 +25,7 @@
 
 class SettingsDemoMode : public Runnable {
   private:
-    boolean hasChanges = false;
+    bool hasChanges = false;
 
   public:
     void run() {

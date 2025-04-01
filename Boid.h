@@ -45,7 +45,7 @@ class Boid {
     byte colorIndex = 0;
     float mass;
 
-    boolean enabled = true;
+    bool enabled = true;
 
     Boid() {}
 
